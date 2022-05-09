@@ -71,7 +71,7 @@ const generatePage = function () {
 
 const main = function () {
   const page = generatePage();
-  fs.writeFileSync('./hello.html', page, 'utf-8');
+  fs.writeFileSync('./index.html', page, 'utf-8');
 };
 
 console.log(main());;
