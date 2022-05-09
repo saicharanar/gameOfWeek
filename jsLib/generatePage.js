@@ -5,7 +5,7 @@ const generateTag = function (tag, content, className) {
 };
 
 const generateLink = function (tag, content, reference, target, relation) {
-  return '<' + tag + ' rel="' + relation + '"' + ' href="' + reference + '" target="' + target + '"' + '">' + content + '</' + tag + '>';
+  return '<' + tag + ' rel="' + relation + '"' + ' href="' + reference + '" target="' + target + '">' + content + '</' + tag + '>';
 };
 
 const generateImg = function (source, width, height) {
@@ -18,18 +18,18 @@ const generateHead = function () {
   return generateTag('head', link + h1, '');
 };
 
-const generateFigure = function () {
+const generateFigure = function (imgSrc) {
   const img = generateImg(
-    'http://s01.riotpixels.net/data/6b/51/6b51250c-3809-490f-be01-0d352a19983a.jpg.1080p.jpg/cover.halo-infinite.849x1080.2020-07-22.10.jpg',
+    imgSrc,
     '280', '350'
   );
-  const anchor = generateLink('a', img, 'http://s01.riotpixels.net/data/6b/51/6b51250c-3809-490f-be01-0d352a19983a.jpg.1080p.jpg/cover.halo-infinite.849x1080.2020-07-22.10.jpg', '_blank', '');
+  const anchor = generateLink('a', img, imgSrc, '_blank', '');
 
   return generateTag('figure', anchor, '');
 };
 
-const generateHeader = function () {
-  return generateTag('header', generateFigure(), 'best game');
+const generateHeader = function (imgSrc) {
+  return generateTag('header', generateFigure(imgSrc), 'best game');
 };
 
 const generateList = function (developer, publisher) {
@@ -44,34 +44,34 @@ const generateDetails = function (developer, publisher) {
   return generateTag('div', list, 'details');
 };
 
-const generateArticle = function () {
-  const header = generateHeader();
-  const details = generateDetails('343i', 'Microsoft');
+const generateArticle = function (game) {
+  const header = generateHeader(game.imgSrc);
+  const details = generateDetails(game.developer, game.publisher);
   const rating = generateTag(
     'div',
-    'Rating : ' + '9.5/10',
+    'Rating : ' + game.rating,
     'rating'
   );
 
   return generateTag('article', header + details + rating, '');
 };
 
-const generateBody = function () {
-  const article = generateArticle();
+const generateBody = function (game) {
+  const article = generateArticle(game);
   const main = generateTag('main', article, 'billboard');
 
   return generateTag('body', main, '');
 };
 
-const generatePage = function () {
+const generatePage = function (game) {
   const head = generateHead();
-  const body = generateBody();
+  const body = generateBody(game);
   return generateTag('html', head + body, '');
 };
 
-const main = function () {
-  const page = generatePage();
+const generateSite = function (game) {
+  const page = generatePage(game);
   fs.writeFileSync('./index.html', page, 'utf-8');
 };
 
-console.log(main());;
+exports.generateSite = generateSite;
