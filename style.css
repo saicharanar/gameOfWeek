@@ -9,13 +9,10 @@ body {
 }
 
 .billboard {
-  height: 600px;
-  width: 900px;
-  background-color: antiquewhite;
-}
-
-.billboard header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 600px;
+  width: 900px;
+  background-color: antiquewhite;
 }
