@@ -1,6 +1,6 @@
 body {
-  width: auto;
-  height: auto;
+  height: 600px;
+  width: 900px;
   margin: 0px;
   font-family: Lato, sans-serif;
   display: flex;
@@ -8,11 +8,16 @@ body {
   align-items: center;
 }
 
-.billboard {
+.billboard>* {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 600px;
-  width: 900px;
-  background-color: antiquewhite;
+}
+
+.billboard .details ul {
+  list-style: none;
+}
+
+.billboard .rating {
+  margin: 0.8em;
 }
